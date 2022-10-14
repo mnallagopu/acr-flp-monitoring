@@ -230,16 +230,19 @@ function lab_scenario_1_validation () {
 	VALIDATION_STATUS=$(az monitor diagnostic-settings list --resource $ACR_ID --query '[].logs[?enabled].category'| grep ContainerRegistryLoginEvents)
 
     if [[ "$VALIDATION_STATUS" == *"ContainerRegistryLoginEvents"* ]]; 
-    then 
+    then
+        echo -e "\n\n========================================================"
+        echo -e "\nPerforming a login action on the ACR:$ACRloginServer\n"  
         docker login $ACRloginServer --username 00000000-0000-0000-0000-000000000000 --password $ACRTOKEN
         countdown -m 2
         echo -e "\n\n========================================================"
         echo -e "\ndiagnostic-settings is configured!\n" 
-		echo -e "\nLab Scenario: PASSED!\n" 
+		    echo -e "\nLab Scenario: PASS!\n" 
+        echo -e "Please check your email inbox for the Login Event Alert"
     else 
         echo -e "\n--> Error: Scenario $LAB_SCENARIO is still FAILED\n\n" 
         echo -e "Diagnostics-Settings needs to be configured!\n"
-        echo -e "\nLab Scenario: FAILED!\n" 		
+        echo -e "\nLab Scenario: FAIL!\n" 		
     fi  
 }
 
