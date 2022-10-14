@@ -232,6 +232,7 @@ function lab_scenario_1_validation () {
     if [[ "$VALIDATION_STATUS" == *"ContainerRegistryLoginEvents"* ]]; 
     then 
         docker login $ACRloginServer --username 00000000-0000-0000-0000-000000000000 --password $ACRTOKEN
+        countdown -m 2
         echo -e "\n\n========================================================"
         echo -e "\ndiagnostic-settings is configured!\n" 
 		echo -e "\nLab Scenario: PASSED!\n" 
