@@ -192,13 +192,20 @@ ACR_ALERT_ID=$(az monitor scheduled-query show\
     --name $ACR_ALERT_NAME \
     --query id --out tsv)
 
+##Login to ACR
+ACRTOKEN=$(az acr login --name $ACR_NAME --expose-token --output tsv --query accessToken)
+ACRloginServer=$(az acr login --name $ACR_NAME --expose-token --output tsv --query loginServer)
+docker login $ACRloginServer --username 00000000-0000-0000-0000-000000000000 --password $ACRTOKEN
+
 ##List Resources created
 echo -e "********************* \n
 ##CREATED RESOURCES DETAILS## \n 
 ACR_ID=$ACR_ID \n
 ACR_LAWS_ID=$ACR_LAWS_ID \n
 ACR_AG_ID=$ACR_AG_ID \n
-ACR_ALERT_ID=$ACR_ALERT_ID \n 
+ACR_ALERT_ID=$ACR_ALERT_ID \n
+ACRloginServer=$ACRloginServer \n
+ACRTOKEN=$ACRTOKEN \n 
 "
 
 echo -e "##CREATED RESOURCES DETAILS \n 
@@ -206,11 +213,13 @@ ACR_NAME=$ACR_NAME \n
 ACR_ID=$ACR_ID \n
 ACR_LAWS_ID=$ACR_LAWS_ID \n
 ACR_AG_ID=$ACR_AG_ID \n
-ACR_ALERT_ID=$ACR_ALERT_ID \n 
+ACR_ALERT_ID=$ACR_ALERT_ID \n
+ACRloginServer=$ACRloginServer \n
+ACRTOKEN=$ACRTOKEN \n 
 " > /tmp/CURRENT_LAB_RESOURCES 
 chmod 777 /tmp/CURRENT_LAB_RESOURCES
-##Login to ACR
-date && az acr login -n $ACR_NAME
+
+
 }
 
 ##########################
@@ -222,6 +231,7 @@ function lab_scenario_1_validation () {
 
     if [[ "$VALIDATION_STATUS" == *"ContainerRegistryLoginEvents"* ]]; 
     then 
+        docker login $ACRloginServer --username 00000000-0000-0000-0000-000000000000 --password $ACRTOKEN
         echo -e "\n\n========================================================"
         echo -e "\ndiagnostic-settings is configured!\n" 
 		echo -e "\nLab Scenario: PASSED!\n" 
