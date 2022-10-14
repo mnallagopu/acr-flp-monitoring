@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## read the options
 TEMP=`getopt -o m:v --long minute:,version -n 'myacrlab.sh' -- "$@"`
 eval set -- "$TEMP"
