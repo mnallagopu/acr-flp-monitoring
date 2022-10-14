@@ -149,11 +149,11 @@ az acr create \
 
 ##Create a log analytic workspace
 echo -e "\n--> Creating log analytic workspace ${ACR_LAWS_NAME}...\n"
-az monitor log-analytics workspace create --resource-group $ACR_RG_NAME --workspace-name $ACR_LAWS_NAME --tags ACRLAB[=MONITORING]
+az monitor log-analytics workspace create --resource-group $ACR_RG_NAME --workspace-name $ACR_LAWS_NAME --tags 'ACRLAB=MONITORING'
 
 ##Create Action group
 echo -e "\n--> Creating Action group ${ACR_AG_NAME}...\n"
-az monitor action-group create --resource-group $ACR_RG_NAME --name $ACR_AG_NAME -a email $USER_ALIAS $EMAIL_ID usecommonalertsChema --tags ACRLAB[=MONITORING]
+az monitor action-group create --resource-group $ACR_RG_NAME --name $ACR_AG_NAME -a email $USER_ALIAS $EMAIL_ID usecommonalertsChema --tags 'ACRLAB=MONITORING'
 
 ##Create alert
 echo -e "\n--> Creating alert ${ACR_ALERT_NAME}...\n"
@@ -185,7 +185,7 @@ az monitor scheduled-query create \
 	--auto-mitigate false \
     --condition "count 'QRY1' > 0" \
     --condition-query QRY1="$QUERY" \
-	--tags ACRLAB[=MONITORING]
+	--tags 'ACRLAB=MONITORING'
 
 ACR_ALERT_ID=$(az monitor scheduled-query show\
     --resource-group $ACR_RG_NAME \
