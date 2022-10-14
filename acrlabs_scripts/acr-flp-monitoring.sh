@@ -227,7 +227,7 @@ chmod 777 /tmp/CURRENT_LAB_RESOURCES
 ##########################
 function lab_scenario_1_validation () {
     . /tmp/CURRENT_LAB_RESOURCES
-	VALIDATION_STATUS=$(az monitor diagnostic-settings list --resource $ACR_ID --query 'value[].logs[?enabled].category'| grep ContainerRegistryLoginEvents)
+	VALIDATION_STATUS=$(az monitor diagnostic-settings list --resource $ACR_ID --query '[].logs[?enabled].category'| grep ContainerRegistryLoginEvents)
 
     if [[ "$VALIDATION_STATUS" == *"ContainerRegistryLoginEvents"* ]]; 
     then 
