@@ -245,6 +245,15 @@ then
 	exit 0
 fi
 
+echo -e "\n--> ACR Troubleshooting Sessions
+********************************************
+
+This tool will use your default subscription to deploy the lab environments.
+Verifing if you are authenticated already...\n"
+
+# Verify az cli has been authenticated
+az_login_check
+
 #############################################################
 ## lab scenario has a valid option
 #############################################################
@@ -315,14 +324,6 @@ echo -e " HELP:$HELP\n ACR_RG_NAME:$ACR_RG_NAME \n ACR_NAME:$ACR_NAME \n LAB_SCE
 ## main ##
 ##########
 
-echo -e "\n--> ACR Troubleshooting Sessions
-********************************************
-
-This tool will use your default subscription to deploy the lab environments.
-Verifing if you are authenticated already...\n"
-
-# Verify az cli has been authenticated
-az_login_check
 
 if [ $LAB_SCENARIO -eq 1 ] && [ $VALIDATE -eq 0 ]
 then
