@@ -182,7 +182,7 @@ az monitor scheduled-query create \
     --evaluation-frequency 1m \
     --mute-actions-duration PT30M \
     --severity 3 \
-	--auto-mitigate false \
+	  --auto-mitigate false \
     --condition "count 'QRY1' > 0" \
     --condition-query QRY1="$QUERY" \
 	--tags 'ACRLAB=MONITORING'
