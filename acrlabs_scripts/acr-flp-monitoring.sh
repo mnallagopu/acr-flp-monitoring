@@ -170,8 +170,8 @@ ACR_AG_ID=$(az monitor action-group show \
     --resource-group $ACR_RG_NAME \
     --name $ACR_AG_NAME \
     --query id --out tsv)
-	
-az monitor action-group show -g $ACR_RG_NAME --name AG-lab1 -o tsv --query id
+
+az config set extension.use_dynamic_install=yes_without_prompt
 
 az monitor scheduled-query create \
     --name "$ACR_ALERT_NAME" \
