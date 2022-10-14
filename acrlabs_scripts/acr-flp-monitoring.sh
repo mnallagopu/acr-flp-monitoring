@@ -53,7 +53,6 @@ do
             "") shift 2;;
             *) USER_ALIAS="$2"; shift 2;;
             esac;;
-            
         -e|--emailid) case "$2" in
             "") shift 2;;
             *) EMAIL_ID="$2"; shift 2;;
@@ -62,7 +61,6 @@ do
             "") shift 2;;
             *) TAG_NAME="$2"; shift 2;;
             esac;; 
-                
         -v|--validate) VALIDATE=1; shift;;
         --version) VERSION=1; shift;;
         --) shift ; break ;;
